@@ -1,21 +1,35 @@
-FROM alpine:3.6
+#
+# Dockerfile for ShadowsocksR
+#
 
-ARG BRANCH=3.1.2
-ARG WORK=~
+FROM alpine:3.7
 
-RUN apk --no-cache add python \
-    libsodium \
-    wget
+ENV SSR_URL https://github.com/shadowsocksr-backup/shadowsocksr/archive/manyuser.zip
 
+RUN set -ex \
+    && apk --update add --no-cache libsodium py-pip \
+    && pip --no-cache-dir install $SSR_URL \
+    && rm -rf /var/cache/apk
 
-RUN mkdir -p $WORK && \
-    wget -qO- --no-check-certificate  https://github.com/yuxizhe/shadowsocksr/archive/$BRANCH.tar.gz | tar -xzf - -C $WORK
+ENV SERVER_ADDR 0.0.0.0
+ENV SERVER_PORT 443
+ENV PASSWORD    yu1234128
+ENV METHOD      none
+ENV PROTOCOL    auth_chain_a
+ENV PROTOCOLPA  154:AtwN3K
+ENV OBFS        http_simple
+ENV TIMEOUT     300
 
+EXPOSE $SERVER_PORT/tcp
+EXPOSE $SERVER_PORT/udp
 
-WORKDIR $WORK/shadowsocksr-$BRANCH/shadowsocks
+WORKDIR /usr/bin/
 
-COPY config.json $WORK/shadowsocksr-$BRANCH/shadowsocks/
-
-RUN touch cron.log
-CMD ["tail", "-f" , "cron.log"] 
-# CMD python server.py -c config.json
+CMD ssserver -s $SERVER_ADDR \
+             -p $SERVER_PORT \
+             -k $PASSWORD    \
+             -m $METHOD      \
+             -O $PROTOCOL    \
+             -o $OBFS        \
+             -t $TIMEOUT     \
+             -G $PROTOCOLPA
