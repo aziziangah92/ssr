@@ -9,6 +9,6 @@
     "method": "none",
     "obfs": "http_simple",
     "obfs_param": "718a8154.vali-dns.cp31.ott.cibntv.net",
-    "protocol": "auth_chain_a",
-    "protocol_param": "154:AtwN3K"
+    "protocol": "plain",
+    "protocol_param": ""
 }
