@@ -15,6 +15,6 @@ RUN mkdir -p $WORK && \
 
 WORKDIR $WORK/shadowsocksr-$BRANCH/shadowsocks
 
-
-EXPOSE $SERVER_PORT
-CMD python server.py -c /config.json
+RUN touch cron.log
+CMD ["tail", "-f" , "cron.log"] 
+# CMD python server.py -c /config.json
