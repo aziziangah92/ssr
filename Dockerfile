@@ -14,8 +14,8 @@ RUN mkdir -p $WORK && \
 
 WORKDIR $WORK/shadowsocksr-$BRANCH/shadowsocks
 
-COPY config.json $WORK/shadowsocksr-$BRANCH/shadowsocks
+COPY config.json $WORK/shadowsocksr-$BRANCH/shadowsocks/
 
-RUN touch cron.log
-CMD ["tail", "-f" , "cron.log"] 
-# CMD python server.py -c /config.json
+# RUN touch cron.log
+# CMD ["tail", "-f" , "cron.log"] 
+CMD python server.py -c config.json
