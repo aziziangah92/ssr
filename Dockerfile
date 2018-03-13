@@ -3,7 +3,6 @@ FROM alpine:3.6
 ARG BRANCH=3.1.2
 ARG WORK=~
 
-COPY config.json /
 RUN apk --no-cache add python \
     libsodium \
     wget
@@ -14,6 +13,8 @@ RUN mkdir -p $WORK && \
 
 
 WORKDIR $WORK/shadowsocksr-$BRANCH/shadowsocks
+
+COPY config.json $WORK/shadowsocksr-$BRANCH/shadowsocks
 
 RUN touch cron.log
 CMD ["tail", "-f" , "cron.log"] 
