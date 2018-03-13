@@ -1,7 +1,7 @@
 FROM alpine:3.6
 
 ARG BRANCH=3.1.2
-ARG WORK=~
+ARG WORK=/usr/yu
 
 RUN apk --no-cache add python \
     libsodium \
