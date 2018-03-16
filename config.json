@@ -3,12 +3,10 @@
     "local_address": "127.0.0.1",
     "local_port": 1080,
     "timeout": 300,
-    "workers": 1,
     "server_port": 443,
     "password": "yu1234128",
-    "method": "none",
+    "method": "aes-256-cfb",
     "obfs": "http_simple",
     "obfs_param": "718a8154.vali-dns.cp31.ott.cibntv.net",
-    "protocol": "plain",
-    "protocol_param": ""
+    "protocol": "origin"
 }
